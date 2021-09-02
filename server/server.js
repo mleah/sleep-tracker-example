@@ -13,3 +13,8 @@ app.get('/test', (req, res) => {
     console.log("I was called!");
     res.json({message: "Connected to server!"});
 });
+
+// POST route for "saving" score - no logic/database to save score currently, so just a mock
+app.post('/sleepscore', (req, res) => {
+    res.json({message: "Received a sleep score!"});
+});
