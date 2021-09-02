@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {calculateSleepScore, generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalculations";
 
@@ -6,6 +6,22 @@ function App() {
     const [durationInBed, setDurationInBed] = useState("");
     const [durationAsleep, setDurationAsleep] = useState("");
     const [displayText, setDisplayText] = useState("");
+
+
+    // Quick check that the test server is working with the FE
+    useEffect(() => {
+        fetch("/test", {method: "get"})
+            .then((res) => {
+                if (!res.ok) {
+                    console.log("API error");
+                    throw Error(res.statusText);
+                }
+                return res.json();
+            })
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err))
+    }, []);
+
 
     const dayByHalfHourOptions = generateDurationByHalfHourWithLabels();
 
