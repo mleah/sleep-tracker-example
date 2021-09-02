@@ -14,6 +14,7 @@ export const generateDurationByHalfHours = (): number[] => {
 // Helper function to create an array of objects to populate a list of <option> elements
 // 24 hours, by half hour
 
+//TODO: handle case of "1 hours" - should be "1 hour"
 export const generateDurationByHalfHourWithLabels = (): Duration[] => {
     return generateDurationByHalfHours().map((current: number, _i) => {
         return {value: current, label: `${current} hours`}

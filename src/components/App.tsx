@@ -4,12 +4,10 @@ import {generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalcula
 
 function App() {
     const [selectValue, setSelectValue] = React.useState("");
-
+    const dayByHalfHourOptions = generateDurationByHalfHourWithLabels();
 
     const onSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setSelectValue(e.target.value);
-        // Testing the array of options function
-        console.log(generateDurationByHalfHourWithLabels());
     }
 
     const isFormDisabled = selectValue === "";
@@ -21,9 +19,10 @@ function App() {
                     <label htmlFor="exampleSelect">example select</label>
                     <select name="exampleSelect" id="select-example" onChange={onSelect} value={selectValue}>
                         <option value="" disabled hidden>Select an option...</option>
-                        <option value={1}>Value 1</option>
-                        <option value={2}>Value 2</option>
-                        <option value={3}>Value 3</option>
+                        {dayByHalfHourOptions.map((current, _i) => {
+                            return <option value={current.value}
+                          key={`${current.value}`}>{current.label}</option>
+                        })}
                     </select>
                 </div>
                 <button
