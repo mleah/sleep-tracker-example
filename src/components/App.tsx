@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalculations";
 
 function App() {
-    const [durationInBed, setDurationInBed] = React.useState("");
-    const [durationAsleep, setDurationAsleep] = React.useState("");
+    const [durationInBed, setDurationInBed] = useState("");
+    const [durationAsleep, setDurationAsleep] = useState("");
+    const [displayText, setDisplayText] = useState("");
 
     const dayByHalfHourOptions = generateDurationByHalfHourWithLabels();
 
@@ -14,6 +15,10 @@ function App() {
 
     const onDurationAsleepChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setDurationAsleep(e.target.value);
+    }
+
+    const onCalculateClick = (): void => {
+        setDisplayText("clicked");
     }
 
     const isFormDisabled = durationInBed === "" || durationAsleep === "";
@@ -47,12 +52,12 @@ function App() {
                     type="button"
                     id="calculate-score-button"
                     disabled={isFormDisabled}
-                    onClick={() => {
-                        console.log("Clicked!!")
-                    }}>
+                    onClick={onCalculateClick}>
                     Calculate
                 </button>
             </form>
+
+            <div>{displayText}</div>
         </div>
     );
 }
