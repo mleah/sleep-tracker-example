@@ -1,8 +1,4 @@
-interface Duration {
-    value: number;
-    label: string;
-}
-
+import {Duration} from "../models/Duration";
 
 // Helper function to create an array of numbers, 0 -24, by half steps (0.5)
 // 24 hours, by half hour
