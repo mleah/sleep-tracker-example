@@ -3,21 +3,21 @@ import './App.css';
 import {generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalculations";
 
 function App() {
-    const [selectValue, setSelectValue] = React.useState("");
+    const [durationInBed, setDurationInBed] = React.useState("");
     const dayByHalfHourOptions = generateDurationByHalfHourWithLabels();
 
     const onSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        setSelectValue(e.target.value);
+        setDurationInBed(e.target.value);
     }
 
-    const isFormDisabled = selectValue === "";
+    const isFormDisabled = durationInBed === "";
 
     return (
         <div className="appContainer">
             <form>
                 <div className="durationInput">
-                    <label htmlFor="exampleSelect">example select</label>
-                    <select name="exampleSelect" id="select-example" onChange={onSelect} value={selectValue}>
+                    <label htmlFor="durationBed">Duration in bed</label>
+                    <select name="durationBed" id="duration-bed" onChange={onSelect} value={durationInBed}>
                         <option value="" disabled hidden>Select an option...</option>
                         {dayByHalfHourOptions.map((current, _i) => {
                             return <option value={current.value}
