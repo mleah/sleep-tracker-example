@@ -27,7 +27,7 @@ function App() {
         <div className="appContainer">
             <form>
                 <div className="durationInput">
-                    <label htmlFor="durationBed">Duration in bed</label>
+                    <label htmlFor="duration-bed">Duration in bed</label>
                     <select name="durationBed" id="duration-bed" onChange={onDurationBedChange} value={durationInBed}>
                         <option value="" disabled hidden>Select an option...</option>
                         {dayByHalfHourOptions.map((current, _i) => {
@@ -38,7 +38,7 @@ function App() {
                 </div>
 
                 <div className="durationInput">
-                    <label htmlFor="durationAsleep">Duration asleep</label>
+                    <label htmlFor="duration-asleep">Duration asleep</label>
                     <select name="durationAsleep" id="duration-asleep" onChange={onDurationAsleepChange} value={durationAsleep}>
                         <option value="" disabled hidden>Select an option...</option>
                         {dayByHalfHourOptions.map((current, _i) => {
