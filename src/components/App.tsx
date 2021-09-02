@@ -7,16 +7,9 @@ function App() {
 
     const onSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setSelectValue(e.target.value);
-        console.log(test());
     }
 
     const isFormDisabled = selectValue === "";
-
-
-    // Testing how to create an array for 24 hour by half hour options
-    const test = (): number[] => {
-        return Array.from(Array.from(Array( (24 / 0.5) + 1).keys()), x => x*0.5);
-    }
 
     return (
         <div className="appContainer">
