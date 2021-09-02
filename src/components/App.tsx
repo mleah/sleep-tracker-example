@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalculations";
+import {calculateSleepScore, generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalculations";
 
 function App() {
     const [durationInBed, setDurationInBed] = useState("");
@@ -19,6 +19,7 @@ function App() {
 
     const onCalculateClick = (): void => {
         setDisplayText("clicked");
+        console.log(calculateSleepScore(durationAsleep, durationInBed));
     }
 
     const isFormDisabled = durationInBed === "" || durationAsleep === "";

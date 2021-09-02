@@ -20,3 +20,8 @@ export const generateDurationByHalfHourWithLabels = (): Duration[] => {
         return {value: current, label: `${current} hours`}
     })
 };
+
+
+export const calculateSleepScore = (durationAsleep: string, durationInBed: string): number => {
+    return Number((100 * (Number(durationAsleep) / Number(durationInBed))).toFixed(2));
+}
