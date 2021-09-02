@@ -10,7 +10,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.get('/test', (req, res) => {
 
     // Will output in the terminal as a secondary check that the endpoint is called
-    console.log("I was called!");
+    console.log("Test endpoint called!");
     res.json({message: "Connected to server!"});
 });
 

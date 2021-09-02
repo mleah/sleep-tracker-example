@@ -7,7 +7,6 @@ function App() {
     const [durationAsleep, setDurationAsleep] = useState("");
     const [displayText, setDisplayText] = useState("");
 
-
     // Quick check that the test server is working with the FE
     useEffect(() => {
         fetch("/test", {method: "get"})
@@ -33,11 +32,33 @@ function App() {
         setDurationAsleep(e.target.value);
     }
 
-    const onCalculateClick = (): void => {
-        const sleepScore = calculateSleepScore(durationAsleep, durationInBed);
+    const saveScore = (sleepScore: number): void => {
+        fetch("/sleepscore",
+            {
+                method: "post",
+                headers: {"Content-type": "application/json;"},
+                body: JSON.stringify({score: sleepScore})
+            })
+            .then((res) => {
+                if (!res.ok) {
+                    setDisplayText("Error occurred - please try again");
+                    throw Error(res.statusText);
+                }
+                return res.json();
+            })
+            .then((_data) => {
+                setDisplayText(sleepScore.toString());
+            })
+            .catch((err) => {
+                console.log(err);
+                setDisplayText("Error occurred - please try again");
+            })
+    }
 
-        // Sleep score returns as number - have to cast to string for now
-        setDisplayText(sleepScore.toString());
+    const onCalculateClick = (): void => {
+        setDisplayText("Loading...");
+        const sleepScore = calculateSleepScore(durationAsleep, durationInBed);
+        saveScore(sleepScore);
     }
 
     const isFormDisabled = durationInBed === "" || durationAsleep === "";
