@@ -18,8 +18,10 @@ function App() {
     }
 
     const onCalculateClick = (): void => {
-        setDisplayText("clicked");
-        console.log(calculateSleepScore(durationAsleep, durationInBed));
+        const sleepScore = calculateSleepScore(durationAsleep, durationInBed);
+
+        // Sleep score returns as number - have to cast to string for now
+        setDisplayText(sleepScore.toString());
     }
 
     const isFormDisabled = durationInBed === "" || durationAsleep === "";
