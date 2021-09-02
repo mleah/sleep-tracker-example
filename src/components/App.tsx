@@ -4,20 +4,26 @@ import {generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalcula
 
 function App() {
     const [durationInBed, setDurationInBed] = React.useState("");
+    const [durationAsleep, setDurationAsleep] = React.useState("");
+
     const dayByHalfHourOptions = generateDurationByHalfHourWithLabels();
 
-    const onSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    const onDurationBedChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setDurationInBed(e.target.value);
     }
 
-    const isFormDisabled = durationInBed === "";
+    const onDurationAsleepChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+        setDurationAsleep(e.target.value);
+    }
+
+    const isFormDisabled = durationInBed === "" || durationAsleep === "";
 
     return (
         <div className="appContainer">
             <form>
                 <div className="durationInput">
                     <label htmlFor="durationBed">Duration in bed</label>
-                    <select name="durationBed" id="duration-bed" onChange={onSelect} value={durationInBed}>
+                    <select name="durationBed" id="duration-bed" onChange={onDurationBedChange} value={durationInBed}>
                         <option value="" disabled hidden>Select an option...</option>
                         {dayByHalfHourOptions.map((current, _i) => {
                             return <option value={current.value}
@@ -25,6 +31,18 @@ function App() {
                         })}
                     </select>
                 </div>
+
+                <div className="durationInput">
+                    <label htmlFor="durationAsleep">Duration asleep</label>
+                    <select name="durationAsleep" id="duration-asleep" onChange={onDurationAsleepChange} value={durationAsleep}>
+                        <option value="" disabled hidden>Select an option...</option>
+                        {dayByHalfHourOptions.map((current, _i) => {
+                            return <option value={current.value}
+                                           key={`${current.value}`}>{current.label}</option>
+                        })}
+                    </select>
+                </div>
+
                 <button
                     type="button"
                     id="calculate-score-button"
