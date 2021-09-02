@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import {generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalculations";
 
 function App() {
     const [selectValue, setSelectValue] = React.useState("");
@@ -7,6 +8,8 @@ function App() {
 
     const onSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setSelectValue(e.target.value);
+        // Testing the array of options function
+        console.log(generateDurationByHalfHourWithLabels());
     }
 
     const isFormDisabled = selectValue === "";
