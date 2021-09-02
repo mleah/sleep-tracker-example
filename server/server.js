@@ -16,5 +16,6 @@ app.get('/test', (req, res) => {
 
 // POST route for "saving" score - no logic/database to save score currently, so just a mock
 app.post('/sleepscore', (req, res) => {
+    console.log("POST body", req.body);
     res.json({message: "Received a sleep score!"});
 });

@@ -36,7 +36,7 @@ function App() {
         fetch("/sleepscore",
             {
                 method: "post",
-                headers: {"Content-type": "application/json;"},
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({score: sleepScore})
             })
             .then((res) => {
