@@ -3,10 +3,12 @@ import './App.css';
 import {calculateSleepScore, generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalculations";
 
 function App() {
+    // State
     const [durationInBed, setDurationInBed] = useState("");
     const [durationAsleep, setDurationAsleep] = useState("");
     const [displayText, setDisplayText] = useState("");
 
+    //
     // Quick check that the test server is working with the FE
     useEffect(() => {
         fetch("/test", {method: "get"})
@@ -23,7 +25,10 @@ function App() {
 
 
     const dayByHalfHourOptions = generateDurationByHalfHourWithLabels();
+    const isFormDisabled = durationInBed === "" || durationAsleep === "";
 
+    //
+    // onChange callbacks
     const onDurationBedChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setDurationInBed(e.target.value);
     }
@@ -32,6 +37,8 @@ function App() {
         setDurationAsleep(e.target.value);
     }
 
+    //
+    // API call for saving score
     const saveScore = (sleepScore: number): void => {
         fetch("/sleepscore",
             {
@@ -55,13 +62,15 @@ function App() {
             })
     }
 
+    //
+    // onClick callback
     const onCalculateClick = (): void => {
+
+        //Note:  Tested this loading text via toggling the network to slow down in my browser dev tools
         setDisplayText("Loading...");
         const sleepScore = calculateSleepScore(durationAsleep, durationInBed);
         saveScore(sleepScore);
     }
-
-    const isFormDisabled = durationInBed === "" || durationAsleep === "";
 
     return (
         <div className="appContainer">
