@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {calculateSleepScore, generateDurationByHalfHourWithLabels} from "../utility/sleepScoreCalculations";
+import Select from "./Select";
+import {Duration} from "../models/Duration";
 
 function App() {
     // State
@@ -24,7 +26,7 @@ function App() {
     }, []);
 
 
-    const dayByHalfHourOptions = generateDurationByHalfHourWithLabels();
+    const dayByHalfHourOptions: Duration[] = generateDurationByHalfHourWithLabels();
     const isFormDisabled = durationInBed === "" || durationAsleep === "";
 
     //
@@ -75,28 +77,18 @@ function App() {
     return (
         <div className="appContainer">
             <form>
-                <div className="durationInput">
-                    <label htmlFor="duration-bed">Duration in bed</label>
-                    <select name="durationBed" id="duration-bed" onChange={onDurationBedChange} value={durationInBed}>
-                        <option value="" disabled hidden>Select an option...</option>
-                        {dayByHalfHourOptions.map((current, _i) => {
-                            return <option value={current.value}
-                          key={`${current.value}`}>{current.label}</option>
-                        })}
-                    </select>
-                </div>
-
-                <div className="durationInput">
-                    <label htmlFor="duration-asleep">Duration asleep</label>
-                    <select name="durationAsleep" id="duration-asleep" onChange={onDurationAsleepChange} value={durationAsleep}>
-                        <option value="" disabled hidden>Select an option...</option>
-                        {dayByHalfHourOptions.map((current, _i) => {
-                            return <option value={current.value}
-                                           key={`${current.value}`}>{current.label}</option>
-                        })}
-                    </select>
-                </div>
-
+                <Select options={dayByHalfHourOptions}
+                        onChange={onDurationBedChange}
+                        label="Duration in bed"
+                        name="bed"
+                        value={durationInBed}
+                />
+                <Select options={dayByHalfHourOptions}
+                        onChange={onDurationAsleepChange}
+                        label="Duration asleep"
+                        name="asleep"
+                        value={durationAsleep}
+                />
                 <button
                     type="button"
                     id="calculate-score-button"
