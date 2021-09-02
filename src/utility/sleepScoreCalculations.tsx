@@ -21,7 +21,8 @@ export const generateDurationByHalfHourWithLabels = (): Duration[] => {
     })
 };
 
-
+//TODO: handle edge cases for infinity ( duration in bed = 0 and duration asleep > 0) and NaN (both 0)
+// Additional - clarify is user should be able to select duration asleep greater than duration in bed
 export const calculateSleepScore = (durationAsleep: string, durationInBed: string): number => {
     return Number((100 * (Number(durationAsleep) / Number(durationInBed))).toFixed(2));
 }

@@ -1,4 +1,8 @@
-import {generateDurationByHalfHours, generateDurationByHalfHourWithLabels} from "./sleepScoreCalculations";
+import {
+    calculateSleepScore,
+    generateDurationByHalfHours,
+    generateDurationByHalfHourWithLabels
+} from "./sleepScoreCalculations";
 
 describe('Utility helper functions', () => {
     describe('generateDurationByHalfHours', () => {
@@ -22,6 +26,29 @@ describe('Utility helper functions', () => {
             expect(testArray[0]).toEqual({value: 0, label: "0 hours"});
             expect(testArray[21]).toEqual({value: 10.5, label: "10.5 hours"});
             expect(testArray[48]).toEqual({value: 24, label: "24 hours"});
+        });
+    });
+
+    describe('calculateSleepScore', () => {
+
+        it('should return a score of 100 * hours_asleep / hours_in_bed, rounded to 2 decimals', () => {
+            const largeDenominator = calculateSleepScore("6.5", "8");
+            const largeNumerator = calculateSleepScore("8", "6.5");
+            const equivalentNumAndDenom = calculateSleepScore("8", "8");
+
+            expect(largeDenominator).toEqual(81.25);
+            expect(largeNumerator).toEqual(123.08);
+            expect(equivalentNumAndDenom).toEqual(100);
+        });
+
+        // Clarify requirements for below tests
+
+        xit('should display error when both numbers are 0', () => {
+            // const test = calculateSleepScore("0", "0");
+        });
+
+        xit('should display error when durationInBed is 0, regardless of durationAsleep value', () => {
+            // const numAndDenomZero = calculateSleepScore("0", "0");
         });
     });
 });
