@@ -1,4 +1,4 @@
-import {generateDurationByHalfHours} from "./sleepScoreCalculations";
+import {generateDurationByHalfHours, generateDurationByHalfHourWithLabels} from "./sleepScoreCalculations";
 
 describe('Utility helper functions', () => {
     describe('generateDurationByHalfHours', () => {
@@ -12,6 +12,16 @@ describe('Utility helper functions', () => {
                 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5,
                 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5,
                 24]);
+        });
+    });
+
+    describe('generateDurationByHalfHourWithLabels', () => {
+
+        it('should return an array of objects with values and labels, incremented by 0.5', () => {
+            const testArray = generateDurationByHalfHourWithLabels();
+            expect(testArray[0]).toEqual({value: 0, label: "0 hours"});
+            expect(testArray[21]).toEqual({value: 10.5, label: "10.5 hours"});
+            expect(testArray[48]).toEqual({value: 24, label: "24 hours"});
         });
     });
 });
